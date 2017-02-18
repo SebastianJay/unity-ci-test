@@ -1,4 +1,4 @@
-# !/bin/sh
+#! /bin/sh
 
 # Rename to your project name
 project="UnityProject"

@@ -1,7 +1,6 @@
-
 language: csharp
 os: osx
 install:
-- ./Scripts/install.sh
+- sudo ./Scripts/install.sh
 script:
-- ./Scripts/build.sh
+- sudo ./Scripts/build.sh
