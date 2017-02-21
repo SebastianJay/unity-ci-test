@@ -8,6 +8,7 @@
 #  -projectPath argument to point to the right location.
 project="UnityProject"
 
+# Recall from install.sh that a separate module was needed for Windows build support
 echo "Attempting build of $project for Windows"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
 	-batchmode \
