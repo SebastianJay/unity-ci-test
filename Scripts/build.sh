@@ -8,6 +8,25 @@
 #  -projectPath argument to point to the right location.
 project="UnityProject"
 
+## Run the editor unit tests
+echo "Running editor unit tests"
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
+	-batchmode \
+	-nographics \
+	-silent-crashes \
+	-logFile $(pwd)/unity.log \
+	-projectPath "$(pwd)/$project" \
+	-runEditorTests \
+	-editorTestsResultFile "$(pwd)/Test.xml" \
+	-quit
+
+rc0=$?
+echo "Unit test logs"
+cat $(pwd)/tests.xml
+# exit if tests failed
+if [$rc0 -ne 0]; then { echo "Failed unit tests"; exit $rc0; } fi
+
+## Make the builds
 # Recall from install.sh that a separate module was needed for Windows build support
 echo "Attempting build of $project for Windows"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
