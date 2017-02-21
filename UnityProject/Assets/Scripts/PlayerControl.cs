@@ -1,18 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This line enables the testing framework to call internal methods
+[assembly:System.Runtime.CompilerServices.InternalsVisibleTo("Assembly-CSharp-Editor")]
+
 public class PlayerControl : MonoBehaviour {
 
-	public int numTokens;
+	public delegate void GotTokenHandler(GameObject sender, GotTokenEvent e);
+	public event GotTokenHandler GotToken;
+
 	public float moveForce;
 	public float jumpForce;
 
 	private bool grounded;
+	private int numTokens;
 
 	// Use this for initialization
 	void Start () {
 		numTokens = 0;
+		grounded = false;
 	}
 	
 	// Update is called once per frame
@@ -29,7 +37,7 @@ public class PlayerControl : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Target") {
-			numTokens += 1;
+			incToken ();
 		}
 	}
 
@@ -42,6 +50,13 @@ public class PlayerControl : MonoBehaviour {
 	void OnCollisionExit2D(Collision2D coll) {
 		if (coll.gameObject.tag == "Ground") {
 			grounded = false;
+		}
+	}
+
+	internal void incToken() {
+		numTokens += 1;
+		if (GotToken != null) {
+			GotToken (this.gameObject, new GotTokenEvent { currentNumberTokens = this.numTokens } );
 		}
 	}
 }
