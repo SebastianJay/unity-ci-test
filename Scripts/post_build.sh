@@ -8,5 +8,5 @@ tar -czvf $winname "$(pwd)/Build/windows"
 tar -czvf $osxname "$(pwd)/Build/osx"
 
 # upload the tarballs to the server for storage
-#scp -i $UPLOAD_KEYFILE $winname $UPLOAD_USER@$UPLOAD_HOST:$UPLOAD_PATH
-#scp -i $UPLOAD_KEYFILE $osxname $UPLOAD_USER@$UPLOAD_HOST:$UPLOAD_PATH
+scp -i $UPLOAD_KEYPATH -o stricthostkeychecking=no $winname $UPLOAD_USER@$UPLOAD_HOST:$UPLOAD_PATH
+scp -i $UPLOAD_KEYPATH -o stricthostkeychecking=no $osxname $UPLOAD_USER@$UPLOAD_HOST:$UPLOAD_PATH
