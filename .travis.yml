@@ -7,11 +7,11 @@ before_install:
 - printenv
 - openssl aes-256-cbc -k "$KEYFILE_PASS" -in ./Scripts/upload.enc -out ./Scripts/upload -d
 install:
-- sudo source ./Scripts/install.sh
+- sudo sh ./Scripts/install.sh
 script:
-- sudo source ./Scripts/build.sh
+- sudo sh ./Scripts/build.sh
 after_success:
-- sudo source ./Scripts/post_build.sh
+- sudo sh ./Scripts/post_build.sh
 notifications:
   email:
     on_success: never
