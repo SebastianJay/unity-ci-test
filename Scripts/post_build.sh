@@ -1,7 +1,7 @@
 #! /bin/sh
 
-winname="${UNITY_PROJECT_NAME}_win.tar.gz"
-osxname="${UNITY_PROJECT_NAME}_osx.tar.gz"
+winname="${UNITYCI_PROJECT_NAME}_win.tar.gz"
+osxname="${UNITYCI_PROJECT_NAME}_osx.tar.gz"
 
 # tar and zip the build folders
 tar -czvf $winname "$(pwd)/Build/windows"
