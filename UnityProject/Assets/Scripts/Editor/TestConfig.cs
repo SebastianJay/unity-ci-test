@@ -7,21 +7,24 @@ using NUnit.Framework;
 [SetUpFixture]
 public class TestConfig
 {
-	// this path should lead to where the editor should be open after testing is complete
-	// TODO find a way to open the scene that was open when hitting the test button
-	private static string returnScenePath = "Assets/Scenes/Main.unity";
-	// this path should lead to an empty scene where the unit testing will occur
-	private static string testScenePath = "Assets/Scenes/UnitTest.unity";
+	private string returnScenePath;
 
 	[SetUp]
 	public void Init() {
-		// unless a new scene is opened the unit tests will run in the active scene, so objects there might interfere
-		EditorSceneManager.OpenScene (testScenePath, OpenSceneMode.Single);
+		// grab the path of the scene which is currently open
+		if (EditorSceneManager.loadedSceneCount > 0) {
+			this.returnScenePath = EditorSceneManager.GetSceneAt(0).path;
+		}
+
+		// create a new blank scene so objects in the active scene do not interfere with tests
+		EditorSceneManager.NewScene (NewSceneSetup.EmptyScene, NewSceneMode.Single);
 	}
 
 	[TearDown]
 	public void Dispose() {
 		// go back to the original scene
-		EditorSceneManager.OpenScene(returnScenePath, OpenSceneMode.Single);
+		if (returnScenePath.Length > 0) {
+			EditorSceneManager.OpenScene(returnScenePath, OpenSceneMode.Single);
+		}
 	}
 }
