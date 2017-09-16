@@ -17,6 +17,6 @@ public class PlayerControlTest {
 
 		player.GetComponent<PlayerControl> ().incToken ();
 
-		Assert.AreEqual (1 * 100, tracker.GetComponent<ScoreTracker> ().score);
+		Assert.AreEqual (2 * 100, tracker.GetComponent<ScoreTracker> ().score);
 	}
 }
