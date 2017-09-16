@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log("Test by phucvin");
 		numTokens = 0;
 		grounded = false;
 	}
